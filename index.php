@@ -2,39 +2,39 @@
     $hotels = [
 
         [
-            'name' => 'Hotel Belvedere',
-            'description' => 'Hotel Belvedere Descrizione',
-            'parking' => true,
-            'vote' => 4,
-            'distance_to_center' => 10.4
+            'Name' => 'Hotel Belvedere',
+            'Description' => 'Hotel Belvedere Descrizione',
+            'Parking' => true,
+            'Vote' => 4,
+            'Distance' => 10.4
         ],
         [
-            'name' => 'Hotel Futuro',
-            'description' => 'Hotel Futuro Descrizione',
-            'parking' => true,
-            'vote' => 2,
-            'distance_to_center' => 2
+            'Name' => 'Hotel Futuro',
+            'Description' => 'Hotel Futuro Descrizione',
+            'Parking' => true,
+            'Vote' => 2,
+            'Distance' => 2
         ],
         [
-            'name' => 'Hotel Rivamare',
-            'description' => 'Hotel Rivamare Descrizione',
-            'parking' => false,
-            'vote' => 1,
-            'distance_to_center' => 1
+            'Name' => 'Hotel Rivamare',
+            'Description' => 'Hotel Rivamare Descrizione',
+            'Parking' => false,
+            'Vote' => 1,
+            'Distance' => 1
         ],
         [
-            'name' => 'Hotel Bellavista',
-            'description' => 'Hotel Bellavista Descrizione',
-            'parking' => false,
-            'vote' => 5,
-            'distance_to_center' => 5.5
+            'Name' => 'Hotel Bellavista',
+            'Description' => 'Hotel Bellavista Descrizione',
+            'Parking' => false,
+            'Vote' => 5,
+            'Distance' => 5.5
         ],
         [
-            'name' => 'Hotel Milano',
-            'description' => 'Hotel Milano Descrizione',
-            'parking' => true,
-            'vote' => 2,
-            'distance_to_center' => 50
+            'Name' => 'Hotel Milano',
+            'Description' => 'Hotel Milano Descrizione',
+            'Parking' => true,
+            'Vote' => 2,
+            'Distance' => 50
         ],
 
     ];
@@ -53,59 +53,37 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>Boovago</h1>
+<body class="d-flex flex-column align-items-center">
+    <h1 class="my-2">Boovago</h1>
 
-    <?php
-            
-        foreach($hotels as $currentHotel) {
-            echo "
-            <li>
-                <ul>
-                    ";
+    <table class="table w-75 border border-secondary my-3">
+        <thead>
+            <tr class="table-primary">
+            <?php
+                foreach ($keys as $key) {
+                    echo "<th scope=\"col\">$key</th>";
+                }
+            ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                foreach ($hotels as $currentHotel) {
+                    echo "
+                    <tr class=\"table-secondary\">";
                     foreach($currentHotel as $key => $value) {
-                        echo "
-                        <li>
-                            $key:  $value
-                        </li>";
+
+                        if($key == 'Parking') {
+                            $value = ($value) ? 'Si' : 'No';
+                        }
+
+                        echo "<td>$value</td>";
                     }
                     echo "
-                </ul>                    
-            </li>
-            ";
-        }
-    ?>
-
-
-    <table class="table">
-    <thead>
-        <tr>
-        <?php
-            foreach ($keys as $key) {
-                echo "<th scope=\"col\">$key</th>";
-            }
-        ?>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        </tr>
-        <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        </tr>
-        <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        </tr>
-    </tbody>
+                    </tr>";
+                }
+            ?>
+        </tbody>
     </table>
 </body>
 </html>
