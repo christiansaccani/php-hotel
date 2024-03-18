@@ -41,11 +41,23 @@
 
     $keys = array_keys($hotels[0]);
 
-    $with_parking = $_GET['with_parking'];
+    $with_parking = isset($_GET['with_parking']) ? $_GET['with_parking'] : null;
+    $with_vote = isset($_GET['with_vote']) ? $_GET['with_vote'] : null;
 
+    $hotelsFiltered = [];
     $hotelsWithParking = [];
 
     foreach ($hotels as $currentHotel) {
+        if ($with_vote !== "") {
+            if ($currentHotel['Vote'] >= $with_vote) {
+                array_push($hotelsFiltered, $currentHotel);
+            }
+        } else {
+            array_push($hotelsFiltered, $currentHotel);
+        }
+    }
+
+    foreach ($hotelsFiltered as $currentHotel) {
         if ($currentHotel['Parking'] === true) {
             array_push($hotelsWithParking, $currentHotel);
         }
@@ -68,13 +80,20 @@
 
     <h1 class="my-2">Boovago</h1>
 
-    <form method="GET" id="my_form">
-        <div class="mb-3 my_txt">
+    <form method="GET" id="my_form" class="d-flex flex-column align-items-center">
+        <div class="mb-3">
             <div class="form-check">
-            <input name="with_parking" class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" <?php if (isset($_GET['with_parking'])) echo "checked"; ?>>
+                <input name="with_parking" class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" <?php if (isset($_GET['with_parking'])) echo "checked"; ?>>
                 <label class="form-check-label" for="flexCheckDefault">
                     Parking
                 </label>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="d-flex flex-column align-items-center">
+                <label class="input-group-textl">Voto</label>
+                <input name="with_vote" type="number" min="1" max="5" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" <?php if (!empty($_GET['with_vote'])) echo 'value="' . $_GET['with_vote'] . '"'; ?>>
             </div>
         </div>
 
@@ -165,6 +184,15 @@
     ?>
 
 
+<?php
+if ($with_vote != "") {
+    // with_vote ha un valore
+    echo "with_vote ha un valore: $with_vote";
+} else {
+    // with_vote non ha un valore
+    echo "with_vote non ha un valore";
+}
+?>
 
 </body>
 </html>
