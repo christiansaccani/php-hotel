@@ -115,13 +115,54 @@
         </tbody>
     </table>
 
+    <!-- Per importare la tabella all'interno di un blocco echo in PHP, memorizzo il markup HTML 
+    in una variabile e quindi la stampo all'interno dell'istruzione echo. -->
+
     <?php
-    // Controllo se $with_parking è uguale a true
-    if ($_GET['with_parking'] === 'true') {
-        // Qui scrivi ciò che vuoi mostrare solo se $with_parking è true
-        echo "<p>Testo da visualizzare solo se \$with_parking è true.</p>";
-    }
-?>
+
+        if ($_GET['with_parking'] === 'true') {
+
+            echo "<h2 class='mt-2'> Hotel filtrati </h2>";
+
+            $tableHTML = '
+                <table class="table w-75 border border-secondary my-3">
+                <thead>
+                <tr class="table-primary">
+            ';
+
+
+            foreach ($keys as $key) {
+                $tableHTML .= "<th scope=\"col\">$key</th>";
+            }
+
+            $tableHTML .= '
+                </tr>
+                </thead>
+                <tbody>
+            ';
+
+            foreach ($hotelsWithParking as $currentHotel) {
+                $tableHTML .= '<tr class="table-secondary">';
+
+                foreach($currentHotel as $key => $value) {
+                    if($key == 'Parking') {
+                        $value = ($value) ? 'Si' : 'No';
+                    }
+                    $tableHTML .= "<td>$value</td>";
+                }
+
+                $tableHTML .= '</tr>';
+            }
+
+            $tableHTML .= '
+                </tbody>
+            </table>
+            ';
+
+            // Stampo la variabile contenente il markup nell' echo
+            echo $tableHTML;
+        }
+    ?>
 
 
 
