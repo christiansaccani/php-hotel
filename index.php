@@ -45,7 +45,7 @@
     $with_vote = isset($_GET['with_vote']) ? $_GET['with_vote'] : null;
 
     $hotelsFiltered = [];
-    $hotelsWithParking = [];
+    $arrayToPrint = [];
 
     foreach ($hotels as $currentHotel) {
         if ($with_vote !== "") {
@@ -58,8 +58,12 @@
     }
 
     foreach ($hotelsFiltered as $currentHotel) {
-        if ($currentHotel['Parking'] === true) {
-            array_push($hotelsWithParking, $currentHotel);
+        if ($with_parking === 'true') {
+            if ($currentHotel['Parking'] === true) {
+                array_push($arrayToPrint, $currentHotel);
+            }
+        } else {
+            array_push($arrayToPrint, $currentHotel);
         }
     }
 ?>
@@ -160,7 +164,7 @@
                 <tbody>
             ';
 
-            foreach ($hotelsWithParking as $currentHotel) {
+            foreach ($arrayToPrint as $currentHotel) {
                 $tableHTML .= '<tr class="table-secondary">';
 
                 foreach($currentHotel as $key => $value) {
@@ -182,17 +186,6 @@
             echo $tableHTML;
         }
     ?>
-
-
-<?php
-if ($with_vote != "") {
-    // with_vote ha un valore
-    echo "with_vote ha un valore: $with_vote";
-} else {
-    // with_vote non ha un valore
-    echo "with_vote non ha un valore";
-}
-?>
 
 </body>
 </html>
