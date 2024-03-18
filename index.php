@@ -143,7 +143,7 @@
 
     <?php
 
-        if ($_GET['with_parking'] === 'true') {
+        if ($with_parking === 'true' || $with_vote != "") {
 
             echo "<h2 class='mt-2'> Hotel filtrati </h2>";
 
