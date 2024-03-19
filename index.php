@@ -87,7 +87,7 @@
     <form method="GET" id="my_form" class="d-flex flex-column align-items-center">
         <div class="mb-3">
             <div class="form-check">
-                <input name="with_parking" class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" <?php if (isset($_GET['with_parking'])) echo "checked"; ?>>
+                <input name="with_parking" class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" <?php if ($with_parking) echo "checked"; ?>> <!-- per mantenere la compilazione del form-->
                 <label class="form-check-label" for="flexCheckDefault">
                     Parking
                 </label>
@@ -97,7 +97,7 @@
         <div class="mb-3">
             <div class="d-flex flex-column align-items-center">
                 <label class="input-group-textl">Voto</label>
-                <input name="with_vote" type="number" min="1" max="5" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" <?php if (!empty($_GET['with_vote'])) echo 'value="' . $_GET['with_vote'] . '"'; ?>>
+                <input name="with_vote" type="number" min="1" max="5" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" <?php if (!empty($with_vote)) echo 'value="' . $with_vote . '"'; ?>> <!-- per mantenere la compilazione del form-->
             </div>
         </div>
 
